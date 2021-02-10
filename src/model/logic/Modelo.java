@@ -55,7 +55,7 @@ public class Modelo {
 	 */
 	public String buscar(String dato)
 	{
-		return datos.buscar(dato);
+		return (String) datos.buscar(dato);
 	}
 	
 	/**
@@ -65,8 +65,12 @@ public class Modelo {
 	 */
 	public String eliminar(String dato)
 	{
-		return datos.eliminar(dato);
+		return (String) datos.eliminar(dato);
 	}
-
+	
+	public String [] invertir ()
+	{
+		return (String[]) datos.invertir();
+	}
 
 }
