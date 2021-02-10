@@ -28,7 +28,7 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
          */
 		public ArregloDinamico( int max )
         {
-               elementos = new  [max];
+               elementos = (T[]) new  String [max];
                tamanoMax = max;
                tamanoAct = 0;
         }
@@ -38,7 +38,7 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
                if ( tamanoAct == tamanoMax )
                {  // caso de arreglo lleno (aumentar tamaNo)
                     tamanoMax = 2 * tamanoMax;
-                    T [ ] copia = (T) elementos;
+                    T [ ] copia = (T[]) elementos;
                     elementos = (T[]) new String[tamanoMax];
                     for ( int i = 0; i < tamanoAct; i++)
                     {
@@ -69,48 +69,86 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
 			return element;
 		}
 
-		public T buscar(T dato) {
-			// TODO implementar
-			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-			for (int i=0; i< tamanoAct; i++)
-			{
-				if(((T) darElemento(i)).compareTo(dato)==0)
-				{
-					return (T) elementos[i];
-				}
-			}
-			return null;
-		}
 
-		public T eliminar(T dato) {
+		public <T extends Comparable<T>> T buscar(T dato) 
+		{
 			// TODO implementar
 			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-			T elemento = buscar(dato);
 			
-				for (int i=0; i< tamanoAct; i++)
-				{
-					if(darElemento(i).compareTo(dato)==0)
-					{
-						elementos[i] = elementos[i+1];
-					}
-				}	
+			T rta = null;
+			boolean stop=false;
 			
-			
-			return elemento;
+            for ( int i = 0; i < tamanoAct && stop==false; i++)
+            {
+            	T objeto= (T) elementos[i];
+            	
+             	 if (  dato.compareTo(objeto)==0)
+             	 {
+             		rta = objeto;
+             		stop = true;
+             	 }
+            } 
+			return rta;
 		}
 		
-		public int compareTo(T obj)
+		
+		public  <T extends Comparable<T>> T eliminar(T dato)
 		{
-			int resultado = (Integer) null;
-			for (int i=0; i< tamanoAct; i++)
+			// TODO implementar
+			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
+			T rta=null;
+			boolean stop=false;
+            for ( int i = 0; i < tamanoAct && stop==false; i++)
+            {
+            	T objeto= (T) elementos[i];
+             	 if (  dato.compareTo(objeto)==0)
+             	 {
+             		rta=objeto;
+             		
+             		for (int j=i;j< tamanoAct;j++)
+             		{
+             			if (j!=tamanoAct-1)
+             				{
+             				elementos[j]=elementos[j+1];
+             				}
+             			else
+             			{
+             				elementos[j]=null;
+             			}
+             		}
+             		
+             		stop=true;
+             		tamanoAct=tamanoAct-1;
+             	 }
+            } 
+			return rta;
+		}
+		
+		
+		@Override
+		public T[] invertir() {
+			// TODO Auto-generated method stub
+			T[]  copia = (T[]) new String [tamanoAct] ;
+
+			for(int i=0; i<tamanoAct; i++)
 			{
-				if ( elementos[i] == obj)
+				for (int j=tamanoAct; j>-1; j--)
 				{
-					resultado = 0;
+					copia[i]= elementos[j];
 				}
 				
 			}
-			return resultado;
+			return copia;
 		}
 
+		
+		
+		@Override
+		public int compareTo(ArregloDinamico<T> o) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+
+		
 }

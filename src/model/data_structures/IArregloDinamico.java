@@ -33,7 +33,7 @@ public interface IArregloDinamico <T extends Comparable <T>>{
 	 * @param dato Objeto de busqueda en el arreglo
 	 * @return elemento encontrado en el arreglo (si existe). null si no se encontro el dato.
 	 */
-	T buscar(T dato);
+	<T extends Comparable<T>> T buscar(T dato);
 	
 	/**
 	 * Eliminar un dato del arreglo.
@@ -41,6 +41,11 @@ public interface IArregloDinamico <T extends Comparable <T>>{
 	 * @param dato Objeto de eliminacion en el arreglo
 	 * @return dato eliminado
 	 */
-	T eliminar( T dato );
+	<T extends Comparable<T>> T eliminar( T dato );
 
+	/**
+	 * Invierte los elementos de la lista.
+	 * @return Lista invertida.
+	 */
+	T[] invertir();
 }
