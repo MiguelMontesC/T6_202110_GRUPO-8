@@ -28,7 +28,7 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
          */
 		public ArregloDinamico( int max )
         {
-               elementos = new  [max];
+               elementos = (T[]) new String[max];;
                tamanoMax = max;
                tamanoAct = 0;
         }
@@ -38,7 +38,7 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
                if ( tamanoAct == tamanoMax )
                {  // caso de arreglo lleno (aumentar tamaNo)
                     tamanoMax = 2 * tamanoMax;
-                    T [ ] copia = (T) elementos;
+                    T [ ] copia = elementos;
                     elementos = (T[]) new String[tamanoMax];
                     for ( int i = 0; i < tamanoAct; i++)
                     {
@@ -54,7 +54,7 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
 			return tamanoMax;
 		}
 
-		public int darTamano() {
+		public int darTamanoAct() {
 			return tamanoAct;
 		}
 
@@ -74,7 +74,7 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
 			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
 			for (int i=0; i< tamanoAct; i++)
 			{
-				if(((T) darElemento(i)).compareTo(dato)==0)
+				if(((T) darElemento(i)).equals(dato))
 				{
 					return (T) elementos[i];
 				}
@@ -89,7 +89,7 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
 			
 				for (int i=0; i< tamanoAct; i++)
 				{
-					if(darElemento(i).compareTo(dato)==0)
+					if(darElemento(i).equals(dato))
 					{
 						elementos[i] = elementos[i+1];
 					}
@@ -98,6 +98,17 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
 			
 			return elemento;
 		}
+		
+		public void invertir()
+		{
+			T [] copia = elementos;
+			elementos = (T[]) new String [tamanoMax];
+			for (int i =0; i < elementos.length; i++)
+			{
+				elementos[tamanoAct-1-i] = copia[i];
+			}
+		}
+		
 		
 		public int compareTo(T obj)
 		{
@@ -112,5 +123,12 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
 			}
 			return resultado;
 		}
+
+		@Override
+		public int compareTo(ArregloDinamico<T> o) {
+			return tamanoAct - o.darTamanoAct();
+		}
+
+		
 
 }

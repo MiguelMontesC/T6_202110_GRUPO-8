@@ -7,7 +7,8 @@ import model.data_structures.IArregloDinamico;
  * Definicion del modelo del mundo
  *
  */
-public class Modelo {
+public class Modelo <T>
+{
 	/**
 	 * Atributos del modelo del mundo
 	 */
@@ -53,7 +54,7 @@ public class Modelo {
 	 * @param dato Dato a buscar
 	 * @return dato encontrado
 	 */
-	public String buscar(String dato)
+	public T buscar(T dato)
 	{
 		return datos.buscar(dato);
 	}
