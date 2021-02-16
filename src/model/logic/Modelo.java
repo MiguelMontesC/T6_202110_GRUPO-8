@@ -2,42 +2,35 @@ package model.logic;
 
 import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
+import model.data_structures.Lista;
+import model.data_structures.YoutubeVideo;
 
-/**
- * Definicion del modelo del mundo
- *
- */
 public class Modelo <T>
 {
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	private IArregloDinamico datos;
+	private ArregloDinamico <YoutubeVideo> datosArreglo;
 	
-	/**
-	 * Constructor del modelo del mundo con capacidad predefinida
-	 */
-	public Modelo()
-	{
-		datos = new ArregloDinamico(7);
-	}
+	private Lista <YoutubeVideo> datosLista;
 	
 	/**
 	 * Constructor del modelo del mundo con capacidad dada
 	 * @param tamano
 	 */
-	public Modelo(int capacidad)
+	public Modelo()
 	{
-		datos = new ArregloDinamico(capacidad);
+		datosArreglo =  new ArregloDinamico <YoutubeVideo> (1000);
+		datosLista = new Lista <YoutubeVideo> ();
 	}
 	
 	/**
 	 * Servicio de consulta de numero de elementos presentes en el modelo 
 	 * @return numero de elementos presentes en el modelo
 	 */
-	public int darTamano()
+	public int darTamanoAct()
 	{
-		return datos.darTamano();
+		return datos.darTamanoAct();
 	}
 
 	/**
@@ -54,9 +47,9 @@ public class Modelo <T>
 	 * @param dato Dato a buscar
 	 * @return dato encontrado
 	 */
-	public T buscar(T dato)
+	public String buscar(String dato)
 	{
-		return datos.buscar(dato);
+		return (String) datos.buscar(dato);
 	}
 	
 	/**
@@ -66,8 +59,9 @@ public class Modelo <T>
 	 */
 	public String eliminar(String dato)
 	{
-		return datos.eliminar(dato);
+		return (String) datos.eliminar(dato);
 	}
 
 
 }
+
