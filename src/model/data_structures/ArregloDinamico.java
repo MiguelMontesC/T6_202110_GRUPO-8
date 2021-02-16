@@ -7,7 +7,7 @@ package model.data_structures;
  * @author Fernando De la Rosa
  *
  */
-public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDinamico <T>, Comparable <ArregloDinamico <T>>
+public class ArregloDinamico <T extends Comparable <T>>  implements ILista <T>, Comparable <ArregloDinamico <T>>
 {
 		/**
 		 * Capacidad maxima del arreglo
@@ -127,6 +127,90 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
 		@Override
 		public int compareTo(ArregloDinamico<T> o) {
 			return tamanoAct - o.darTamanoAct();
+		}
+
+		@Override
+		public void addFirst(T element) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void addLast(T element) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void insertElement(T element, int pos) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public T removeFirst() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public T removeLast() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public T deleteElement(int pos) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public T firtsElement() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public T lastElement() throws Exception {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public T getElement(int pos) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public int size() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public int isPresent(T elemento) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public void exchange(int i, int j) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void changeInfo(int i, T elemento) {
+			// TODO Auto-generated method stub
+			
 		}
 
 		
