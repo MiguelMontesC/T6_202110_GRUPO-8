@@ -22,11 +22,12 @@ public interface ILista  <T extends Comparable <T>> {
 	void addLast(T element);
 	
 	/**
-	 * Agrega un elemento en la posición pos si la posición es una posición válida.
+	 * Agrega un elemento en la posiciï¿½n pos si la posiciï¿½n es una posiciï¿½n vï¿½lida.
 	 * @param elemento a agregar.
-	 * @param posición donde se agrega.
+	 * @param posiciï¿½n donde se agrega.
+	 * @throws Exception 
 	 */
-	void insertElement(T element, int pos);
+	void insertElement(T element, int pos) throws Exception;
 	
 	/**
 	 * Elimina el primer elemento. 
@@ -35,14 +36,14 @@ public interface ILista  <T extends Comparable <T>> {
 	T removeFirst();
 	
 	/**
-	 * Elimina el último elemento. 
+	 * Elimina el ï¿½ltimo elemento. 
 	 * @return El elemento eliminado.
 	 */
 	T removeLast();
 	
 	/**
-	 * Elimina el elemento de una posición válida.
-	 * @param posición del elemento que se va a eliminar.
+	 * Elimina el elemento de una posiciï¿½n vï¿½lida.
+	 * @param posiciï¿½n del elemento que se va a eliminar.
 	 * @return el elemento eliminado.
 	 */
 	T deleteElement(int pos);
@@ -54,48 +55,48 @@ public interface ILista  <T extends Comparable <T>> {
 	T firtsElement();
 	
 	/**
-	 * Retorna el último elemento.
-	 * @return último elemento.
+	 * Retorna el ï¿½ltimo elemento.
+	 * @return ï¿½ltimo elemento.
 	 */
 	T lastElement() throws Exception;
 	
 	/**
-	 * Retorna el elemento en una posición válida.
-	 * @param posición del elemento
-	 * @return elemento en la posición dada.
+	 * Retorna el elemento en una posiciï¿½n vï¿½lida.
+	 * @param posiciï¿½n del elemento
+	 * @return elemento en la posiciï¿½n dada.
 	 */
 	T getElement(int pos);
 
 	/**
-	 * Retorna el número de datos del arreglo
-	 * @return Número de datos del arreglo
+	 * Retorna el nï¿½mero de datos del arreglo
+	 * @return Nï¿½mero de datos del arreglo
 	 */
 	int size();
 	
 	/**
-	 * Retorna si la lista esta o no vacía
+	 * Retorna si la lista esta o no vacï¿½a
 	 * @return true si el arreglo No tiene datos. false de lo contrario.
 	 */
 	boolean isEmpty();
 	
 	/**
-	 * Retorna la posición válida de un elemento.
+	 * Retorna la posiciï¿½n vï¿½lida de un elemento.
 	 * @param elemento que se busca.
-	 * @return la posición válida del elemento. Si no se encuentra el elemento, el valor retornado es -1
+	 * @return la posiciï¿½n vï¿½lida del elemento. Si no se encuentra el elemento, el valor retornado es -1
 	 */
 	int isPresent(T elemento);
 	
 	/**
-	 * Intercambia la información de los elementos en dos posiciones válidas.
-	 * @param primer posición.
-	 * @param segunda posición.
+	 * Intercambia la informaciï¿½n de los elementos en dos posiciones vï¿½lidas.
+	 * @param primer posiciï¿½n.
+	 * @param segunda posiciï¿½n.
 	 * 
 	 */
 	void exchange(int i, int j);
 	
 	/**
-	 * Actualiza el elemento en una posición válida.
-	 * @param posición del elemento.
+	 * Actualiza el elemento en una posiciï¿½n vï¿½lida.
+	 * @param posiciï¿½n del elemento.
 	 * @param elemento que va a reemplazar.
 	 */
 	void changeInfo(int i, T elemento);

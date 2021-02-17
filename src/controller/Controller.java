@@ -1,5 +1,6 @@
 package controller;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 import model.logic.Modelo;
@@ -23,7 +24,7 @@ public class Controller
 		modelo = new Modelo();
 	}
 
-	public void run()
+	public void run() throws ParseException
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
@@ -36,19 +37,16 @@ public class Controller
 			int option = lector.nextInt();
 			switch(option){
 			case 1:
-				view.printMessage("--------- Cargar YoutubeVideo en Lista Encadenada ");
-				int capacidad = lector.nextInt();
-				modelo = new Modelo(capacidad); 
-				view.printMessage("Arreglo Dinamico creado");
-				view.printMessage("Numero actual de elementos " + modelo.darTamanoAct() + "\n---------");						
+				view.printMessage("--------- Cargar YoutubeVideo en Lista Encadenada ---------");
+				modelo = new Modelo(); 
+				modelo.cargarYoutubeVideoListaEncadenada();
+				view.printMessage("Se ha cargado con Exito en la Lista Encadenada");						
 				break;
 
 			case 2:
 				view.printMessage("--------- Cargar YoutubeVideo en Arreglo Dinamico ");
-				dato = lector.next();
-				modelo.agregar(dato);
-				view.printMessage("Dato agregado");
-				view.printMessage("Numero actual de elementos " + modelo.darTamanoAct() + "\n---------");						
+				modelo.cargarDatosArregloDinamico();
+				view.printMessage("Se ha cargado con Exito en el Arreglo Dinamico");
 				break;
 			case 3: 
 				view.printMessage("--------- \n Hasta pronto !! \n---------"); 

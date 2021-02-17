@@ -1,6 +1,7 @@
-package model.data_structures;
+package model.logic;
+import java.util.Date;
 
-import java.sql.Date;
+import model.data_structures.ArregloDinamico;
 
 /**
  * @author miguelmontes
@@ -45,7 +46,7 @@ public class YoutubeVideo implements Comparable <YoutubeVideo>
 	/**
 	 * Arraylist que contiene los tags del video
 	 */
-	private ArregloDinamico tags;
+	private ArregloDinamico<String> tags;
 
 	/**
 	 * Numero de views del video
@@ -63,7 +64,7 @@ public class YoutubeVideo implements Comparable <YoutubeVideo>
 	private int numeroDislikes;
 
 	
-	public YoutubeVideo(String Identificador, Date fechaTrending, String tit, String titCan, int Catego, Date publi, ArregloDinamico ttt, int numeroV ,int numeroL, int numeroD)
+	public YoutubeVideo(String Identificador, Date fechaTrending, String tit, String titCan, int Catego, Date publi, ArregloDinamico<String> ttt, int numeroV ,int numeroL, int numeroD)
 	{
 		id = Identificador;
 		trendingDate = fechaTrending;
@@ -78,6 +79,7 @@ public class YoutubeVideo implements Comparable <YoutubeVideo>
 	  	
 	}
 	
+
 	public String getId() {
 		return id;
 	}

@@ -7,7 +7,7 @@ package model.data_structures;
  * @author Fernando De la Rosa
  *
  */
-public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDinamico <T>, Comparable <ArregloDinamico <T>>
+public class ArregloDinamico <T extends Comparable <T>>  implements ILista <T>, Comparable <ArregloDinamico <T>>
 {
 		/**
 		 * Capacidad maxima del arreglo
@@ -125,7 +125,6 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
 		}
 		
 		
-		@Override
 		public T[] invertir() {
 			// TODO Auto-generated method stub
 			T[]  copia = (T[]) new Comparable [tamanoAct] ;
@@ -200,7 +199,7 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
 	           tamanoAct++;
 		}
 
-		public void insertElement(T dato, int pos) throws Exception
+		public void insertElement(T dato, int pos) throws Exception 
 		{
 			if (pos < 1 || pos > tamanoAct)
 			{
@@ -285,17 +284,17 @@ public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDina
 			return (T) elementos[tamanoAct - 1];
 		}
 		
-		T getElement(int pos)
+		public T getElement(int pos)
 		{
 			return (T) elementos[pos];
 		}
 
-		int size()
+		public int size()
 		{
 			return tamanoAct;
 		}
 	
-		boolean isEmpty()
+		public boolean isEmpty()
 		{
 			if(tamanoAct == 0)
 			{
