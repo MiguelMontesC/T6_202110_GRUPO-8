@@ -7,7 +7,7 @@ package model.data_structures;
  * @author Fernando De la Rosa
  *
  */
-public class ArregloDinamico <T extends Comparable <T>>  implements ILista <T>, Comparable <ArregloDinamico <T>>
+public class ArregloDinamico <T extends Comparable <T>>  implements IArregloDinamico <T>, Comparable <ArregloDinamico <T>>
 {
 		/**
 		 * Capacidad maxima del arreglo
@@ -28,7 +28,7 @@ public class ArregloDinamico <T extends Comparable <T>>  implements ILista <T>, 
          */
 		public ArregloDinamico( int max )
         {
-               elementos = (T[]) new String[max];;
+               elementos = (T[]) new Comparable [max];
                tamanoMax = max;
                tamanoAct = 0;
         }
@@ -38,8 +38,8 @@ public class ArregloDinamico <T extends Comparable <T>>  implements ILista <T>, 
                if ( tamanoAct == tamanoMax )
                {  // caso de arreglo lleno (aumentar tamaNo)
                     tamanoMax = 2 * tamanoMax;
-                    T [ ] copia = elementos;
-                    elementos = (T[]) new String[tamanoMax];
+                    T [ ] copia = (T[]) elementos;
+                    elementos = (T[]) new Comparable [tamanoMax];
                     for ( int i = 0; i < tamanoAct; i++)
                     {
                      	 elementos[i] = (T) copia[i];
@@ -54,7 +54,7 @@ public class ArregloDinamico <T extends Comparable <T>>  implements ILista <T>, 
 			return tamanoMax;
 		}
 
-		public int darTamanoAct() {
+		public int darTamano() {
 			return tamanoAct;
 		}
 
@@ -69,150 +69,266 @@ public class ArregloDinamico <T extends Comparable <T>>  implements ILista <T>, 
 			return element;
 		}
 
-		public T buscar(T dato) {
-			// TODO implementar
-			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-			for (int i=0; i< tamanoAct; i++)
-			{
-				if(((T) darElemento(i)).equals(dato))
-				{
-					return (T) elementos[i];
-				}
-			}
-			return null;
-		}
 
-		public T eliminar(T dato) {
+		public T buscar(T dato) 
+		{
 			// TODO implementar
 			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-			T elemento = buscar(dato);
 			
-				for (int i=0; i< tamanoAct; i++)
-				{
-					if(darElemento(i).equals(dato))
-					{
-						elementos[i] = elementos[i+1];
-					}
-				}	
+			T rta = null;
+			boolean stop=false;
 			
-			
-			return elemento;
-		}
-		
-		public void invertir()
-		{
-			T [] copia = elementos;
-			elementos = (T[]) new String [tamanoMax];
-			for (int i =0; i < elementos.length; i++)
-			{
-				elementos[tamanoAct-1-i] = copia[i];
-			}
+            for ( int i = 0; i < tamanoAct && stop==false; i++)
+            {
+            	T objeto= (T) elementos[i];
+            	
+             	 if (  dato.compareTo(objeto)==0)
+             	 {
+             		rta = objeto;
+             		stop = true;
+             	 }
+            } 
+			return rta;
 		}
 		
 		
-		public int compareTo(T obj)
+		public T eliminar(T dato)
 		{
-			int resultado = (Integer) null;
-			for (int i=0; i< tamanoAct; i++)
+			// TODO implementar
+			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
+			T rta=null;
+			boolean stop=false;
+            for ( int i = 0; i < tamanoAct && stop==false; i++)
+            {
+            	T objeto= (T) elementos[i];
+             	 if (  dato.compareTo(objeto)==0)
+             	 {
+             		rta=objeto;
+             		
+             		for (int j=i;j< tamanoAct;j++)
+             		{
+             			if (j!=tamanoAct-1)
+             				{
+             				elementos[j]=elementos[j+1];
+             				}
+             			else
+             			{
+             				elementos[j]=null;
+             			}
+             		}
+             		
+             		stop=true;
+             		tamanoAct=tamanoAct-1;
+             	 }
+            } 
+			return rta;
+		}
+		
+		
+		@Override
+		public T[] invertir() {
+			// TODO Auto-generated method stub
+			T[]  copia = (T[]) new Comparable [tamanoAct] ;
+
+			for(int i=0; i<tamanoAct; i++)
 			{
-				if ( elementos[i] == obj)
+				for (int j=tamanoAct; j>-1; j--)
 				{
-					resultado = 0;
+					copia[i]= elementos[j];
 				}
 				
 			}
-			return resultado;
-		}
-
-		@Override
-		public int compareTo(ArregloDinamico<T> o) {
-			return tamanoAct - o.darTamanoAct();
-		}
-
-		@Override
-		public void addFirst(T element) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void addLast(T element) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void insertElement(T element, int pos) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public T removeFirst() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public T removeLast() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public T deleteElement(int pos) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public T firtsElement() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public T lastElement() throws Exception {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public T getElement(int pos) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public int size() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public boolean isEmpty() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public int isPresent(T elemento) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public void exchange(int i, int j) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void changeInfo(int i, T elemento) {
-			// TODO Auto-generated method stub
-			
+			return copia;
 		}
 
 		
+		
+		@Override
+		public int compareTo(ArregloDinamico<T> o) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+		
+		
+		public void expandArray() 
+		{
+			T[] expanded = (T[]) new Object[5+tamanoAct]; ;
+			for (int i = 0; i < elementos.length; i++)
+			{
+			expanded[i] = (T) elementos[i];
+			}
+			tamanoMax=5+tamanoAct;
+			elementos = null;
+			elementos = expanded;
+			}
+		
+		public void addFirst(T dato)
+		{
+			if(elementos[0] == null)
+			{
+				elementos[0]= dato;
+			}
+			else
+			{
+				if ( tamanoMax == tamanoAct )
+				{
+				expandArray();
+				}
+				for(int i=tamanoAct; i>0;i--)
+				{
+					elementos[i]= elementos[i-1];
+				}
+				elementos[0]=dato;
+			}
+			 tamanoAct++;
+		}
+		
+		public void addLast(T dato)
+		{
+			   if ( tamanoAct == tamanoMax )
+	           {  // caso de arreglo lleno (aumentar tamaNo)
+	                tamanoMax = 2 * tamanoMax;
+	                Object [ ] copia = elementos;
+	                elementos = (T[]) new Object [tamanoMax]; 
+	                for ( int i = 0; i < tamanoAct; i++)
+	                {
+	                 	 elementos[i] = (T) copia[i];
+	                } 
+	        	    System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
+	           }	
+	           elementos[tamanoAct] = dato;
+	           tamanoAct++;
+		}
+
+		public void insertElement(T dato, int pos) throws Exception
+		{
+			if (pos < 1 || pos > tamanoAct)
+			{
+				throw new Exception("no se puede eliminar el objeto de la posicion"+pos);
+			}
+			
+			if ( tamanoMax == tamanoAct )
+			{
+			expandArray();
+			}
+			
+	        for ( int i = tamanoAct; i > pos-1; i--)
+	        {
+	        	
+	         			
+	         	elementos[i]=elementos[i-1];
+	         			
+	         }
+	         		
+	         elementos[pos]=dato;
+	         		
+	         tamanoAct++;
+	         	 
+	         
+			
+		}
+		
+		public T removeFirst() {
+			
+			T primero = (T) elementos[0];
+			for(int i = 0; i < tamanoAct ; i++)
+			{
+				if (i!=tamanoAct-1)
+					{
+					elementos[i]=elementos[i+1];
+					}
+				else
+				{
+					elementos[i]=null;
+				}
+			}
+			tamanoAct=tamanoAct-1;
+			return primero;
+		}
+		
+		public T removeLast()
+		{
+			T ultimo = (T) elementos[tamanoAct-1];
+			elementos[tamanoAct-1] = null; 
+			tamanoAct--;
+			return ultimo;
+		}
+		
+		public T deleteElement(int pos)
+		{
+			T eliminado = (T) elementos[pos-1]; 
+			for(int i = pos-1  ; i <tamanoAct ; i++)
+			{
+				if (i!=tamanoAct-1)
+					{
+					elementos[i]=elementos[i+1];
+					}
+				else
+				{
+					elementos[i]=null;
+				}
+					
+					
+				
+			}
+			tamanoAct=tamanoAct-1;
+			return eliminado;
+		}
+		
+		public T firtsElement()
+		{
+			return (T) elementos[0];
+		}
+		
+		public T lastElement()
+		{
+			return (T) elementos[tamanoAct - 1];
+		}
+		
+		T getElement(int pos)
+		{
+			return (T) elementos[pos];
+		}
+
+		int size()
+		{
+			return tamanoAct;
+		}
+	
+		boolean isEmpty()
+		{
+			if(tamanoAct == 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		
+		
+		public int isPresent(T elemento)
+		{
+			int rta = -1;
+			for(int i = 0; i < tamanoAct && rta == -1; i++)
+			{
+				T comparar = (T) elementos[i];
+				if(elemento.compareTo(comparar) == 0)
+				{
+					rta = i+1;
+				}
+			}
+			return rta; 
+		}
+		
+		public void exchange(int i, int j)
+		{
+			T copia = (T) elementos[i];
+			elementos[i] = elementos[j];
+			elementos[j] = copia; 
+		}
+		
+		public void changeInfo(int i, T elemento)
+		{
+			elementos[i-1] = elemento; 			
+		}
 
 }
