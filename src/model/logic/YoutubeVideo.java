@@ -64,7 +64,7 @@ public class YoutubeVideo implements Comparable <YoutubeVideo>
 	private int numeroDislikes;
 
 	
-	public YoutubeVideo(String Identificador, Date fechaTrending, String tit, String titCan, int Catego, Date publi, ArregloDinamico<String> ttt, int numeroV ,int numeroL, int numeroD)
+	public YoutubeVideo(String Identificador, Date fechaTrending,  String tit, String titCan, int Catego, Date publi,  ArregloDinamico<String> ttt, int numeroV ,int numeroL, int numeroD)
 	{
 		id = Identificador;
 		trendingDate = fechaTrending;

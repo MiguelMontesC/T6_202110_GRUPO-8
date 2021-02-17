@@ -28,8 +28,6 @@ public class Controller
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
-		String dato = "";
-		String respuesta = "";
 
 		while( !fin ){
 			view.printMenu();
@@ -40,6 +38,7 @@ public class Controller
 				view.printMessage("--------- Cargar YoutubeVideo en Lista Encadenada ---------");
 				modelo = new Modelo(); 
 				modelo.cargarYoutubeVideoListaEncadenada();
+				view.printMessage("");
 				view.printMessage("Se ha cargado con Exito en la Lista Encadenada");						
 				break;
 

@@ -14,11 +14,13 @@ public class View
     
 	public void printMenu()
 	{
+		System.out.println("");
 		System.out.println("Dar el numero de opcion a resolver, luego oprimir tecla Enter: (e.g., 1):");
-
-		
+		System.out.println("");
 		System.out.println("1. Cargar Youtube Video en Lista Encadenada");
 		System.out.println("2. Cargar Youtube Video en Arreglo Dinamico");
+		System.out.println("3. Salir");
+
 
 	}
 
@@ -27,9 +29,6 @@ public class View
 		System.out.println(mensaje);
 	}		
 	
-	public void printModelo(Modelo modelo)
-	{
-		// TODO implementar
-	}
+	
 
 }

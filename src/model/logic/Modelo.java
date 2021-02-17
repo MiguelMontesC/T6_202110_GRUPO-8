@@ -49,7 +49,7 @@ public class Modelo {
 		{
 		
 			arhcCVS= new FileReader("data/videos-small.csv");
-			com.opencsv.CSVParser conPuntoYComa = new CSVParserBuilder().withSeparator(';').build();
+			com.opencsv.CSVParser conPuntoYComa = new CSVParserBuilder().withSeparator(',').build();
 			csvReader =new CSVReaderBuilder(arhcCVS).withCSVParser(conPuntoYComa).build();
 			
 			String[] palabra=csvReader.readNext();
@@ -60,14 +60,16 @@ public class Modelo {
 					
 					String id= palabra[0];
 					
-					DateFormat aaa = new SimpleDateFormat("dd.MM.yyyy");
-					DateFormat bbb = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					SimpleDateFormat aaa = new SimpleDateFormat("dd.MM.yyyy");
+					SimpleDateFormat bbb = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 					
-					Date tredingDate = aaa.parse(palabra[1]);
+					Date trendingDate = aaa.parse(palabra[1]);		
 					String titulo = palabra[2];
 					String tituloCanal = palabra[3];
 					int catego = Integer.parseInt(palabra[4]);
 					Date publishingTime = bbb.parse(palabra[5]);
+					
+					//System.out.println();
 
 					ArregloDinamico <String> ttt = new ArregloDinamico<String>(1000);
 					String array = palabra[6];
@@ -85,9 +87,10 @@ public class Modelo {
 
 					
 					
-					youtube = new YoutubeVideo (id, tredingDate, titulo, tituloCanal,catego ,publishingTime, ttt, numeroV, numeroL, numeroD);
+					youtube = new YoutubeVideo (id,trendingDate,  titulo, tituloCanal,catego,publishingTime , ttt, numeroV, numeroL, numeroD);
 					lista.addFirst(youtube);
 					
+					csvReader.close();
 				}
 					
 					
@@ -107,26 +110,26 @@ public class Modelo {
 	
 	public void cargarDatosArregloDinamico () throws ParseException
 	{
-		FileReader arhcCVS=null;
-		CSVReader csvReader=null;
+		FileReader arhcCVS2=null;
+		CSVReader csvReader2=null;
 		
 		try
 		{
 		
-			arhcCVS= new FileReader("data/videos-small.csv");
-			com.opencsv.CSVParser conPuntoYComa = new CSVParserBuilder().withSeparator(';').build();
-			csvReader =new CSVReaderBuilder(arhcCVS).withCSVParser(conPuntoYComa).build();
+			arhcCVS2= new FileReader("data/videos-small.csv");
+			com.opencsv.CSVParser conPuntoYComa = new CSVParserBuilder().withSeparator(',').build();
+			csvReader2 =new CSVReaderBuilder(arhcCVS2).withCSVParser(conPuntoYComa).build();
 			
-			String[] palabra=csvReader.readNext();
+			String[] palabra=csvReader2.readNext();
 			
-				while ((palabra =csvReader.readNext())!=null)
+				while ((palabra =csvReader2.readNext())!=null)
 				{	
-					palabra =csvReader.readNext();
+					palabra =csvReader2.readNext();
 					
 					String id= palabra[0];
 					
 					DateFormat aaa = new SimpleDateFormat("dd.MM.yyyy");
-					DateFormat bbb = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					DateFormat bbb = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 					
 					Date tredingDate = aaa.parse(palabra[1]);
 					String titulo = palabra[2];
