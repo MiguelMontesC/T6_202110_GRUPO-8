@@ -265,18 +265,18 @@ public class Lista <T extends Comparable <T>> implements ILista <T> {
 	}
 	
 	
-	public T subLista (int inicio, int size)
+	public ILista subLista (int size)
 	{
-		Node subLista= (Node) getElement(inicio);
-		Node firstSubList= (Node) getElement(inicio);
+		Node firstSubList = listFirst;
+		Lista subLista = new Lista((T) firstSubList);
+		
 		for(int i=0; i<size; i++)
 		{
 			
-			firstSubList = firstSubList.getNext();
-			((ILista<T>) subLista).addLast((T) firstSubList);
+			subLista.addFirst((T) firstSubList.getNext());
 		}
 		
-		return (T) subLista;
+		return subLista;
 	}
 	
 	

@@ -33,20 +33,30 @@ public class Controller
 			view.printMenu();
 
 			int option = lector.nextInt();
-			switch(option){
+			switch(option) {					
 			case 1:
 				view.printMessage("--------- Cargar YoutubeVideo en Lista Encadenada ---------");
 				modelo = new Modelo(); 
 				modelo.cargarYoutubeVideoListaEncadenada();
 				view.printMessage("");
-				view.printMessage("Se ha cargado con Exito en la Lista Encadenada");						
-				break;
+				view.printMessage("Se ha cargado con Exito en la Lista Encadenada");
+				view.printMessage("--------- Escriba el numero de YoutubeVideo que quiere cargar en Lista Encadenada ---------");
+				int nume = lector.nextInt();
+				modelo.cargar_NUMERO_DatosEnLista(nume);
+				view.printMessage("Se ha cargado con Exito en el Arreglo Dinamico");
+				break;	
+				
 
 			case 2:
 				view.printMessage("--------- Cargar YoutubeVideo en Arreglo Dinamico ");
 				modelo.cargarDatosArregloDinamico();
 				view.printMessage("Se ha cargado con Exito en el Arreglo Dinamico");
+				view.printMessage("--------- Escriba el numero de YoutubeVideo que quiere cargar en Arreglo Dinamico ---------");
+				int num = lector.nextInt();
+				modelo.cargar_NUMERO_DatosEnArregloDinamico(num);
+				view.printMessage("Se ha cargado con Exito en el Arreglo Dinamico");
 				break;
+				
 			case 3: 
 				view.printMessage("--------- \n Hasta pronto !! \n---------"); 
 				lector.close();

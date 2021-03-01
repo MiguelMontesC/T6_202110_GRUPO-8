@@ -331,12 +331,13 @@ public class ArregloDinamico <T extends Comparable <T>>  implements ILista <T>, 
 		}
 
 		@Override
-		public T subLista(int inicio, int size) {
-			T subLista = new (T) Comparable [size];
-			
-			for(int i=inicio, j=0; j<size; i++, j++)
+		public ILista subLista(int size) 
+		{
+			ArregloDinamico <T> subLista = new ArregloDinamico<T>(size);
+
+			for(int i=0, j=0; j<size; i++, j++)
 			{
-				subLista[j] = elementos [i];
+				subLista.addFirst( elementos [i]);
 			}
 			return subLista;
 		}

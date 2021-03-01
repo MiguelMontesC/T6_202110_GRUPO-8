@@ -8,7 +8,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -16,7 +15,6 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import model.data_structures.ArregloDinamico;
 import model.data_structures.Lista;
-
 
 /**
  * Definicion del modelo del mundo
@@ -29,47 +27,44 @@ public class Modelo {
 	private ArregloDinamico<YoutubeVideo> datos;
 	private Lista lista;
 	private YoutubeVideo youtube;
+
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
-	public Modelo()
-	{
+	public Modelo() {
 		datos = new ArregloDinamico<YoutubeVideo>(100000000);
-		lista = new Lista(youtube) ;
+		lista = new Lista(youtube);
 	}
-	
-	
-	
+
 	public void cargarYoutubeVideoListaEncadenada() throws ParseException
 	{
 		FileReader arhcCVS=null;
 		CSVReader csvReader=null;
-		
 		try
 		{
-		
+
 			arhcCVS= new FileReader("data/videos-small.csv");
 			com.opencsv.CSVParser conPuntoYComa = new CSVParserBuilder().withSeparator(',').build();
 			csvReader =new CSVReaderBuilder(arhcCVS).withCSVParser(conPuntoYComa).build();
-			
+
 			String[] palabra=csvReader.readNext();
-			
-				while ((palabra =csvReader.readNext())!=null)
-				{	
-					palabra =csvReader.readNext();
-					
+
+			palabra =csvReader.readNext();
+
+			while (palabra !=null)
+			{	
+				try {
+
 					String id= palabra[0];
-					
+
 					SimpleDateFormat aaa = new SimpleDateFormat("dd.MM.yyyy");
 					SimpleDateFormat bbb = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-					
+
 					Date trendingDate = aaa.parse(palabra[1]);		
 					String titulo = palabra[2];
 					String tituloCanal = palabra[3];
 					int catego = Integer.parseInt(palabra[4]);
 					Date publishingTime = bbb.parse(palabra[5]);
-					
-					//System.out.println();
 
 					ArregloDinamico <String> ttt = new ArregloDinamico<String>(1000);
 					String array = palabra[6];
@@ -79,21 +74,37 @@ public class Modelo {
 						String meter = dividir [i];
 						ttt.addFirst(meter);
 					}
-					
-					
+
+
 					int numeroV = Integer.parseInt(palabra[7]);
 					int numeroL = Integer.parseInt(palabra[8]);
 					int numeroD = Integer.parseInt(palabra[9]);
 
-					
-					
+
+
 					youtube = new YoutubeVideo (id,trendingDate,  titulo, tituloCanal,catego,publishingTime , ttt, numeroV, numeroL, numeroD);
 					lista.addFirst(youtube);
-					
-					csvReader.close();
+					System.out.println(youtube.getId());
 				}
-					
-					
+				catch (Exception e)
+				{
+					// error pasando de csv a youtube
+					System.out.println("Error leyendo video");
+				}
+				try
+				{
+					palabra =csvReader.readNext();
+
+				}
+				catch (Exception e)
+				{
+					palabra =csvReader.readNext();
+					// no lee la linea y sigue 
+					System.out.println("Lee siguiente video");
+				}
+			}
+			csvReader.close();
+
 		} 
 		catch (FileNotFoundException e)
 		{
@@ -104,34 +115,34 @@ public class Modelo {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+		System.out.println("El tamaño de la lista es " + lista.size());
 	}
-	
-	public void cargarDatosArregloDinamico () throws ParseException
+
+	public void cargarDatosArregloDinamico() throws ParseException 
 	{
-		FileReader arhcCVS2=null;
-		CSVReader csvReader2=null;
-		
+		FileReader arhcCVS=null;
+		CSVReader csvReader=null;
 		try
 		{
-		
-			arhcCVS2= new FileReader("data/videos-small.csv");
+
+			arhcCVS= new FileReader("data/videos-small.csv");
 			com.opencsv.CSVParser conPuntoYComa = new CSVParserBuilder().withSeparator(',').build();
-			csvReader2 =new CSVReaderBuilder(arhcCVS2).withCSVParser(conPuntoYComa).build();
-			
-			String[] palabra=csvReader2.readNext();
-			
-				while ((palabra =csvReader2.readNext())!=null)
-				{	
-					palabra =csvReader2.readNext();
-					
+			csvReader =new CSVReaderBuilder(arhcCVS).withCSVParser(conPuntoYComa).build();
+
+			String[] palabra=csvReader.readNext();
+
+			palabra =csvReader.readNext();
+
+			while (palabra !=null)
+			{	
+				try {
+
 					String id= palabra[0];
-					
-					DateFormat aaa = new SimpleDateFormat("dd.MM.yyyy");
-					DateFormat bbb = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-					
-					Date tredingDate = aaa.parse(palabra[1]);
+
+					SimpleDateFormat aaa = new SimpleDateFormat("dd.MM.yyyy");
+					SimpleDateFormat bbb = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+					Date trendingDate = aaa.parse(palabra[1]);		
 					String titulo = palabra[2];
 					String tituloCanal = palabra[3];
 					int catego = Integer.parseInt(palabra[4]);
@@ -145,19 +156,37 @@ public class Modelo {
 						String meter = dividir [i];
 						ttt.addFirst(meter);
 					}
-					
-					
+
+
 					int numeroV = Integer.parseInt(palabra[7]);
 					int numeroL = Integer.parseInt(palabra[8]);
 					int numeroD = Integer.parseInt(palabra[9]);
 
-					
-					
-					youtube = new YoutubeVideo (id, tredingDate, titulo, tituloCanal,catego ,publishingTime, ttt, numeroV, numeroL, numeroD);
-					datos.addFirst(youtube);						
+
+
+					youtube = new YoutubeVideo (id,trendingDate,  titulo, tituloCanal,catego,publishingTime , ttt, numeroV, numeroL, numeroD);
+					datos.addLast(youtube);
+					System.out.println(youtube.getId());
 				}
-					
-					
+				catch (Exception e)
+				{
+					// error pasando de csv a youtube
+					System.out.println("Error leyendo video");
+				}
+				try
+				{
+					palabra =csvReader.readNext();
+
+				}
+				catch (Exception e)
+				{
+					palabra =csvReader.readNext();
+					// no lee la linea y sigue 
+					System.out.println("Lee siguiente video");
+				}
+			}
+			csvReader.close();
+
 		} 
 		catch (FileNotFoundException e)
 		{
@@ -168,7 +197,201 @@ public class Modelo {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println("El tamaño de el arreglo es" + datos.size());
 	}
-	
+
+	public void cargar_NUMERO_DatosEnArregloDinamico(int num) 
+	{
+		if (num > datos.darTamano())
+			num = datos.darTamano();
+				{
+					datos.subLista(num);
+				}
+		
+		
+		/*/
+		FileReader arhcCVS=null;
+		CSVReader csvReader=null;
+		try
+		{
+
+			arhcCVS= new FileReader("data/videos-small.csv");
+			com.opencsv.CSVParser conPuntoYComa = new CSVParserBuilder().withSeparator(',').build();
+			csvReader =new CSVReaderBuilder(arhcCVS).withCSVParser(conPuntoYComa).build();
+
+			String[] palabra=csvReader.readNext();
+
+			palabra =csvReader.readNext();
+
+			while (palabra !=null)
+			{	
+				try {
+
+					String id= palabra[0];
+
+					SimpleDateFormat aaa = new SimpleDateFormat("dd.MM.yyyy");
+					SimpleDateFormat bbb = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+					Date trendingDate = aaa.parse(palabra[1]);		
+					String titulo = palabra[2];
+					String tituloCanal = palabra[3];
+					int catego = Integer.parseInt(palabra[4]);
+					Date publishingTime = bbb.parse(palabra[5]);
+
+					ArregloDinamico <String> ttt = new ArregloDinamico<String>(1000);
+					String array = palabra[6];
+					String [] dividir = array.split("|");
+					for (int i =0; i < dividir.length; i++)
+					{
+						String meter = dividir [i];
+						ttt.addFirst(meter);
+					}
+
+
+					int numeroV = Integer.parseInt(palabra[7]);
+					int numeroL = Integer.parseInt(palabra[8]);
+					int numeroD = Integer.parseInt(palabra[9]);
+
+
+
+					youtube = new YoutubeVideo (id,trendingDate,  titulo, tituloCanal,catego,publishingTime , ttt, numeroV, numeroL, numeroD);
+					datos.addLast(youtube);
+
+					if (datos.darTamano() == num)
+					{
+						palabra = null;
+					}
+					System.out.println(youtube.getId());
+				}
+				catch (Exception e)
+				{
+					// error pasando de csv a youtube
+					System.out.println("Error leyendo video");
+				}
+				try
+				{
+					palabra =csvReader.readNext();
+
+				}
+				catch (Exception e)
+				{
+					palabra =csvReader.readNext();
+					// no lee la linea y sigue 
+					System.out.println("Lee siguiente video");
+				}
+			}
+			csvReader.close();
+
+		} 
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (CsvValidationException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("El tamaño de el arreglo es" + datos.size());
+		
+		*/
+	}
+
+	public void cargar_NUMERO_DatosEnLista(int num)
+	{
+		if (num > lista.size())
+		num = lista.size();
+			{
+			lista.subLista(num);	
+			}
+
+		/*/
+		FileReader arhcCVS=null;
+		CSVReader csvReader=null;
+		try
+		{
+
+			arhcCVS= new FileReader("data/videos-small.csv");
+			com.opencsv.CSVParser conPuntoYComa = new CSVParserBuilder().withSeparator(',').build();
+			csvReader =new CSVReaderBuilder(arhcCVS).withCSVParser(conPuntoYComa).build();
+
+			String[] palabra=csvReader.readNext();
+
+			palabra =csvReader.readNext();
+
+			while (palabra !=null)
+			{	
+				try {
+
+					String id= palabra[0];
+
+					SimpleDateFormat aaa = new SimpleDateFormat("dd.MM.yyyy");
+					SimpleDateFormat bbb = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+					Date trendingDate = aaa.parse(palabra[1]);		
+					String titulo = palabra[2];
+					String tituloCanal = palabra[3];
+					int catego = Integer.parseInt(palabra[4]);
+					Date publishingTime = bbb.parse(palabra[5]);
+
+					ArregloDinamico <String> ttt = new ArregloDinamico<String>(1000);
+					String array = palabra[6];
+					String [] dividir = array.split("|");
+					for (int i =0; i < dividir.length; i++)
+					{
+						String meter = dividir [i];
+						ttt.addFirst(meter);
+					}
+
+
+					int numeroV = Integer.parseInt(palabra[7]);
+					int numeroL = Integer.parseInt(palabra[8]);
+					int numeroD = Integer.parseInt(palabra[9]);
+
+
+					youtube = new YoutubeVideo (id,trendingDate,  titulo, tituloCanal,catego,publishingTime , ttt, numeroV, numeroL, numeroD);
+					lista.addFirst(youtube);
+					while (num < lista.size())
+					{
+						if (lista.size() == num)
+						{
+							palabra = null;
+						}
+					}
+				}
+				catch (Exception e)
+				{
+					// error pasando de csv a youtube
+					System.out.println("Error leyendo video");
+				}
+				try
+				{
+					palabra =csvReader.readNext();
+
+				}
+				catch (Exception e)
+				{
+					palabra =csvReader.readNext();
+					// no lee la linea y sigue 
+					System.out.println("Lee siguiente video");
+				}
+			}
+			csvReader.close();
+
+		} 
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (CsvValidationException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("El tamaño de la lista es " + lista.size());
+	}
+/*/
+
+	}
+
 }
