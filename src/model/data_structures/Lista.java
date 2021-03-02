@@ -9,17 +9,10 @@ package model.data_structures;
  */
 public class Lista <T extends Comparable <T>> implements ILista <T> {
 
-	private Node<T> listFirst;
+	private Node<T> listFirst = null;
 	private int listSize;
 
 
-	// Esto no se si sea importante
-	/*
-	public Lista()
-	{
-	listFirst = null;
-	}
-	 */
 	public Lista (T item)
 	{
 		listFirst = new Node<T> (item) ;
@@ -29,11 +22,17 @@ public class Lista <T extends Comparable <T>> implements ILista <T> {
 	@Override
 	public void addFirst(T element) {
 		// TODO Auto-generated method stub
-		Node <T> newHead = new Node<> (element);
-		newHead.setNextNode(listFirst);
-		listFirst = newHead;
-		listSize++;
-
+		if(listFirst == null)
+		{
+			listFirst = (Node<T>) element;
+		}
+		else
+		{
+			Node <T> newHead = new Node<> (element);
+			newHead.setNextNode(listFirst);
+			listFirst = newHead;
+			listSize++;
+		}
 	}
 
 	@Override
@@ -265,16 +264,20 @@ public class Lista <T extends Comparable <T>> implements ILista <T> {
 		}
 	}
 	
-	public ILista<T>subLista (int num)
+	
+	public T subLista (int inicio, int size)
 	{
-		Node subLista = listFirst;
-		Node act= subLista;
-		for(int i=0; i<num; i++)
+		Node subLista= (Node) getElement(inicio);
+		Node firstSubList= (Node) getElement(inicio);
+		for(int i=0; i<size; i++)
 		{
-			act= act.getNext();
-			((ILista<T>) subLista).addLast((T) act);
+			
+			firstSubList = firstSubList.getNext();
+			((ILista<T>) subLista).addLast((T) firstSubList);
 		}
-		return (ILista<T>) subLista;
+		
+		return (T) subLista;
 	}
-
+	
+	
 }

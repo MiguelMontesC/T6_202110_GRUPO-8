@@ -101,5 +101,5 @@ public interface ILista  <T extends Comparable <T>> {
 	 */
 	void changeInfo(int i, T elemento);
 	
-
+	public T subLista (int inicio, int size);
 }
